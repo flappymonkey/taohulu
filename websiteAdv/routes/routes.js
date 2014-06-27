@@ -10,10 +10,10 @@ var userinfo = require('./restful/userinfo');
 var report = require('./restful/report');
 
 module.exports = function (app) {
-    app.get('/', filter.authorize, index.index);
-    app.get('/user/login', user.login);
-    app.post('/user/login', user.dologin);
-    app.get('/user/logout', user.dologout);
+    app.get('/spa', filter.authorize, index.index);
+    app.get('/spa/user/login', user.login);
+    app.post('/spa/user/login', user.dologin);
+    app.get('/spa/user/logout', user.dologout);
 
     app.get('/restful/user', filter.ajaxAuth, userinfo.getUserInfo);
     app.post('/restful/user/passwd', filter.ajaxAuth, userinfo.passwd);
