@@ -1,0 +1,25 @@
+<div id="breadcrumbs" class="breadcrumbs">
+	<ul class="breadcrumb">
+		<li> <a href="#!/home">首页</a> </li>
+		<li class="active">财务记录</li>
+	</ul>
+</div>
+<div class="campaigns mt15">	    
+    <tabset>
+    	<tab heading="财务记录">
+	    	<div class="table-top-pannel">
+	    		<label>时间范围：
+		    		<div type="button" class="btn btn-default btn-sm" my-daterange="daterangeOptions" callback="dateRangeCallback" id="reportrange" >
+					    <i class="fa fa-calendar fa-lg"></i>
+					    <span>{{startDate}} 至 {{endDate}}</span> <b class="caret"></b>
+					</div>
+				</label>
+				<button class="fr"><i class="fa fa-download"></i></button>
+			</div>
+	        <table class="display" my-datatable dt-options="overrideOptions"
+	            dt-data="financeData"
+	            >
+	        </table>
+    	</tab>
+  	</tabset>
+</div>

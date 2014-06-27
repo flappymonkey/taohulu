@@ -1,0 +1,46 @@
+<div id="breadcrumbs" class="breadcrumbs">
+	<ul class="breadcrumb">
+		<li> <a href="#!/home">首页</a> </li>
+		<li class="active"> <a href="#!/campaigns/index">推广计划</a> </li>
+		<li class="active">
+			<span class="dropdown">
+              计划名称：<a href="#!/campaigns/adgroups/index?type=item&campaignId={{campaign_info.campaign_id}}">
+                {{campaign_info.title}} <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li ng-repeat="campaign in campaigns">
+                    <a href="#!/campaigns/adgroups/index?type=item&campaignId={{campaign.campaign_id}}">{{campaign.title}}</a>
+                </li>
+              </ul>
+            </span></li>
+		<li class="active">推广宝贝</li>
+	</ul>
+</div>
+<div class="adgroup-detail clearfix">
+	<div class="fl">
+		<a href="{{adgroup_info.detail_url}}" target="_blank"><img width=80 height=80 src="{{adgroup_info.pic_url}}"></a>
+	</div>
+	<div class="adgroup-details-text">
+		<h4> 宝贝名称： <a href="{{}}">{{adgroup_info.title}}</a></h4>
+		<h4> 价      格： {{adgroup_info.price}}</h4>
+		<h4> 默认出价： {{adgroup_info.default_price / 100}}元</h4>
+	</div>
+</div>
+<div class="mt15">
+    <tabset>
+    	<tab heading="创意">
+	    	<div class="table-top-pannel">
+				<!-- <a type="button" class="btn btn-default btn-sm" href="#!/campaigns/adgroups/items/add?campaignId={{campaignId}}">添加创意</a> -->
+			</div>
+			<table class="display" id="creatives_table" my-datatable dt-options="creativeOptions"
+	            dt-data="creativeData"
+	            >
+	        </table>
+    	</tab>
+    	<tab heading="推广位置">
+    		<div class="table-top-pannel">
+
+    		</div>
+    	</tab>
+  	</tabset>
+</div>

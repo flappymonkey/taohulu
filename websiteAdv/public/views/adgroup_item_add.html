@@ -1,0 +1,65 @@
+<div id="breadcrumbs" class="breadcrumbs">
+	<ul class="breadcrumb">
+		<li> <a href="#!/home">首页</a> </li>
+		<li class="active"> <a href="#!/campaigns/index">推广计划</a> </li>
+		<li class="active">新建宝贝推广</li>
+	</ul>
+	<h1>新建宝贝推广</h1>
+</div>
+<div class="adgroup-item-add-ctn">
+<div class="flowsteps">
+	<ol class="clearfix">
+		<li class="fs-item fs-item-current"><b>1 </b>选择推广计划</li>
+		<li class="fs-item"><b>2 </b>选择宝贝</li>
+		<li class="fs-item"><b>3 </b>设置点击单价</li>
+		<li class="fs-item"><b>4 </b>完成推广</li>
+	</ol>
+</div>
+<div class="panel0">
+	<div class="module-top-reminder">
+		<ul class="ml10">
+			<li class="mb5"> 请先选择一个推广计划，<a href="#!/campaigns/add">或者新建一个推广计划 >></a> </li>
+		</ul>
+	</div>
+	<table class="display campaigns-list" my-datatable dt-options="campaignOptions"
+		dt-data="campaignsData">
+	</table>
+</div>
+<div class="panel1">
+	<div class="module-top-reminder">
+		<ul class="ml10">
+			<li class="mb5"> 您可以对销售量、库存和发布时间进行排序并选择有优势的宝贝。 </li>
+		</ul>
+	</div>
+	<table class="display products-toadd-list" my-datatable dt-options="adgroupOptions"
+		dt-data="productsData">
+	</table>
+	<div>
+		<button type="button" class="btn btn-default" ng-click="toStep0()">上一步</button>
+	</div>
+</div>
+<div class="panel2">
+	<div class="module-top-reminder">
+		<ul class="ml10">
+			<li class="mb5"> </li>
+		</ul>
+	</div>
+	<div class="price-ctn">
+		点击单价：<input type="text" id="default_price">元
+	</div>
+	<div>
+		<button type="button" class="btn btn-default" ng-click="toStep1()">上一步</button>
+		<button type="button" class="btn btn-info" ng-click="toStep3()">下一步</button>
+	</div>
+</div>
+<div class="panel3">
+	<h2>恭喜您，已完成宝贝推广！</h2>
+	<p>
+		<h6>您还可以：</h6>
+		<ul>
+			<li>1、继续 <a id="" href="#!/campaigns/adgroup-item-add" ng-click="createAgain()">推广宝贝</a></li>
+			<li>2、<a href="#!/campaigns/adgroups/index?type=item&campaignId={{campaignId}}">设置和管理宝贝推广</a></li>
+		</ul>
+	</p>
+</div>
+</div>

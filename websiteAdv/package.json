@@ -1,0 +1,26 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "forever start -l /tmp/logs/forever/jdyun_adv.log -e /tmp/logs/forever/jdyun_adv_error.log -w -a start.js"
+  },
+  "dependencies": {
+    "express": "~4.0.0",
+    "static-favicon": "~1.0.0",
+    "morgan": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "express-session": "*",
+    "body-parser": "~1.0.0",
+    "debug": "~0.7.4",
+    "jade": "~1.3.0",
+    "stylus": "0.42.3",
+  	"ejs": "*",
+  	"handlebars":"*",
+    "mysql":"*",
+    "mongodb": "*",
+    "orm": "*",
+    "moment": "*",
+    "log4js": "*"
+  }
+}

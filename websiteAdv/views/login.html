@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>登陆页面 - 筋斗云 开发者后台</title>
+
+		<meta name="description" content="User login page" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/css/login.css" />
+	</head>
+
+	<body class="full-body">
+		<div class="bg">
+			<img class="img-bg" src="/images/back.jpg" />
+		</div>
+
+		<div class="login-ctn">
+			<form action="/user/login" method="post" id="loginForm">
+			<a class="home" href="/"></a>
+			<div class="title">
+				<label><span>登录</span>筋斗云</label>
+			</div>
+			{@if error}
+				<div class="tips password-wrong">
+					用户名或密码错误,如果忘记请联系客服
+				</div>
+			{@/if}
+			<div class="input">
+				<span>
+					<i class="icon-envelope"></i>
+					<input name="username" type="text" placeholder="用户名" value="${username}" />
+				</span>
+			</div>
+			<div class="input">
+				<span>
+					<i class="icon-lock"></i>
+					<input name="password" type="password" placeholder="密码" value="${password}" />
+				</span>
+			</div>
+			<div class="submit-ctn">
+				<button onclick="login();">登录</button>
+			</div>
+			<div class="resetpass-ctn">
+				<p>忘记密码？</p>
+				<span>请联系客服，提供证件，重置密码</span>
+			</div>
+			</form>
+		</div>
+
+<script src="http://cdn.bootcss.com/jquery/2.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+	function login(event){
+		var form = document.getElementById("loginForm");
+		if(event){
+			if((event.keyCode || event.which) == 13){
+				form.submit();
+			}
+		}else{
+			form.submit();
+		}
+	}
+</script>
+
+	</body>
+</html>

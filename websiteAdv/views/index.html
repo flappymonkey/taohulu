@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>筋斗云 广告主后台</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css" >
+  <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" >
+  <!-- <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.8.2/css/jquery.dataTables.css"> -->
+  <link rel="stylesheet" type="text/css" href="/css/datatable.css">
+</head>
+<body>
+    <table id="main">
+      <tr>
+        <td colspan="2">
+          <div class="common-header">
+            <a href="#!/home" class="brand">
+              <small>
+                筋斗云   广告主后台
+              </small>
+            </a>
+
+            <div class="header-right fr mr15 mt10">
+            <input type="hidden" id="nick" value="${nick}">
+              您好，${nick}，
+              <a href="/user/logout">
+                  <i class="icon-off"></i>
+                  退出
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td id="left">
+          <div class="common-left">
+            <ul class="topnav">
+              <li class="topnav-list">
+                <a id="menu_home" class="text current" href="#!/home">首页</a>
+              </li>
+              <li class="topnav-list">
+                <a id="menu_campaigns" class="text" href="#!/campaigns/index">推广计划</a>
+              </li>
+              <li class="topnav-list">
+                <a id="menu_report"  class="text" href="#!/report/index">报表</a>
+              </li>
+              <li class="topnav-list">
+                <a id="menu_account" class="toggler" onclick="return false;" href="#!/account">
+                  <i class="fa fa-chevron-right ft16"></i><span>财务管理</span>
+                </a>
+                <ul class="subnav none">
+                  <li class="subnav-list">
+                    <a id="menu_recharge" class="text" href="#!/account/recharge">充值</a>
+                  </li>
+                  <li class="subnav-list">
+                    <a id="menu_finance" class="text" href="#!/account/finance">财务记录</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="topnav-list">
+                <a id="menu_products" class="text" href="#!/products/index">商品管理</a>
+              </li>
+              <li class="topnav-list">
+                <a id="menu_user" class="toggler" onclick="return false;" href="#!/user">
+                  <i class="fa fa-chevron-right ft16"></i><span>账户</span>
+                </a>
+                <ul class="subnav none">
+                  <li class="subnav-list">
+                    <a id="menu_passwd" class="text" href="#!/user/passwd">修改密码</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </td>
+        <td id="right">
+            <div class="inmain" data-ng-view data-ng-cloak id="view"><div>
+        </td>
+      </tr>
+    </table>
+
+  <!-- preload script -->
+  <!-- Note: when adding new script, need to config copy task at Gruntfile.js -->
+  <!-- 示例地址-->
+  <!--
+  <script src="http://seajs.org/dist/sea.js" id="seajsnode"></script>
+  <script src="http://code.angularjs.org/1.2.0-rc.3/angular.min.js"></script>
+  <script src="http://code.angularjs.org/1.2.0-rc.3/angular-route.min.js"></script>
+  -->
+
+  <!-- 实际项目中用bower安装到本地 -->
+  <script src="/lib/seajs/sea.js" id="seajsnode"></script>
+  <script src="/lib/jquery/jquery.min.js"></script>
+  <!-- <script src="/lib/datatables/media/js/jquery.dataTables.min.js"></script> -->
+  <script src="/lib/angular/angular.js"></script>
+  <script src="/lib/angular-route/angular-route.js"></script>
+  <script src="/lib/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="/lib/angular-lazyload/angular-lazyload.js"></script>
+  <script src="/lib/bootstrap-daterangepicker/moment.js"></script>
+  <script src="/lib/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="/lib/highcharts-ng.js"></script>
+
+  <script>
+    seajs.config({
+      base: './',
+      alias: {
+        'datatables': 'lib/datatables/jquery.dataTables.min',
+        'momentjs': 'lib/bootstrap-daterangepicker/moment',
+        'daterangepicker': 'lib/bootstrap-daterangepicker/daterangepicker.js',
+        'daterangepicker-css': 'lib/bootstrap-daterangepicker/daterangepicker-bs3.css'
+      }
+    });
+
+    seajs.on('error', function(module){
+      if(module.status!=5){
+        console.error('seajs error: ', module);
+      }
+    });
+
+    seajs.use(['app'], function(app){
+      angular.bootstrap(document, ['app']);
+    });
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<div id="breadcrumbs" class="breadcrumbs">
+	<ul class="breadcrumb">
+		<li> <a href="#!/home">首页</a> </li>
+		<li class="active"><a href="#!/campaigns/index">推广计划</a></li>
+		<li class="active">新建推广计划</li>
+	</ul>
+</div>
+<h1>新建推广计划</h1>
+<div class="new-campaign">
+	<div>
+		<h6>推广计划名称：</h6>
+		<input type="text" id="campaign_name">推广计划名称在40个字符内，一个汉字为两个字符
+	</div>
+	<div>
+		<h6>复用以前计划：</h6>
+		<select id="reuse_campaign">
+			<option value="-1">不复用</option>
+		</select>
+	</div>
+	<button ng-click="submit()" type="button" class="btn btn-info">提交</button>
+</div>
+<div class="campaign-add-result">
+	<h2>恭喜您，已成功创建推广计划！</h2>
+	<p>
+		<h6>您还可以：</h6>
+		<ul>
+			<li>1、再 <a href="#!/campaigns/add" ng-click="createAgain()">创建一个推广计划</a></li>
+			<li>2、<a href="#!/campaigns/adgroups/index?type=item&campaignId={{campaignId}}">设置和管理推广计划</a></li>
+			<li>3、在此计划下新增 <a href="#!/campaigns/adgroups/items/add?campaignId={{campaignId}}&step=2">宝贝推广</a> 或 <a href="#!/campaigns/adgroups/pages/add?campaignId={{campaignId}}&step=2">店铺推广</a></li>
+		</ul>
+	</p>
+</div>

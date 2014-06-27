@@ -1,0 +1,239 @@
+<div id="breadcrumbs" class="breadcrumbs">
+	<ul class="breadcrumb">
+		<li> <a href="#!/home">首页</a> </li>
+        <li class="active"> <a href="#!/campaigns/index">推广计划</a> </li>
+		<li class="active">
+            <span class="dropdown">
+              计划名称：<a href>
+                {{campaign_info.title}} <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li ng-repeat="campaign in campaigns">
+                    <a href="#!/campaigns/adgroups/index?type=item&campaignId={{campaign.campaign_id}}">{{campaign.title}}</a>
+                </li>
+              </ul>
+            </span>
+        </li>
+	</ul>
+    <h1>{{campaign_name}}</h1>
+</div>
+<div class="campaign-setting-ctn">
+	<span type="button" class="btn btn-default btn-lg" ng-click="setBudget()">
+		<i class="fa fa-money"></i>设置日限额
+	</span>
+	<span type="button" class="btn btn-default btn-lg" ng-click="setMarketTime('lg')">
+		<i class="fa fa-clock-o"></i>设置投放时间
+	</span>
+	<span type="button" class="btn btn-default btn-lg" ng-click="setMarketAddr()">
+		<i class="fa fa-map-marker"></i>设置投放地域
+	</span>
+</div>
+<div class="adgroups mt15">
+    <tabset>
+    	<tab heading="推广宝贝">
+	    	<div class="table-top-pannel">
+				<a type="button" class="btn btn-default btn-sm" href="#!/campaigns/adgroups/items/add?campaignId={{campaignId}}">新建宝贝推广</a>
+				<button type="button" class="btn btn-default btn-sm" ng-click="changeDefaultPrice()">修改默认出价</button>
+				<button type="button" class="btn btn-default btn-sm" ng-click="stop()">暂停推广</button>
+				<button type="button" class="btn btn-default btn-sm" ng-click="run()">参与推广</button>
+				<button type="button" class="btn btn-default btn-sm" ng-click="delete()">删除</button>
+			</div>
+	        <table class="display" id="campaigns_table" my-datatable dt-options="overrideOptions"
+	            dt-data="adgroupsData"
+	            >
+	        </table>
+    	</tab>
+  	</tabset>
+</div>
+<script type="text/ng-template" id="setBudget.html">
+    <div class="modal-header">
+        <h3 class="modal-title">设置日限额</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+        	<div class="col-md-2">日限额：</div>
+        	<div class="col-md-10"><input id="budget" type="text" value="{{budget / 100}}">元</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">确定</button>
+        <button class="btn btn-warning" ng-click="cancel()">取消</button>
+    </div>
+</script>
+<script type="text/ng-template" id="setMarketTime.html">
+    <div class="modal-header">
+        <h3 class="modal-title">设置投放时间</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row time-setting">
+        	<div class="col-md-3">
+        		<h3> 00:00 - 06:00 </h3>
+        		<div class="row show-grid">
+        			<div class="col-md-2">0</div>
+        			<div class="col-md-2">1</div>
+        			<div class="col-md-2">2</div>
+        			<div class="col-md-2">3</div>
+        			<div class="col-md-2">4</div>
+        			<div class="col-md-2">5</div>
+        		</div>
+        		<div class="row show-grid">
+        			<div class="col-md-2"><input id="time_0" class="hour-checkbox" type="checkbox" ng-model="market_time[0]"></div>
+        			<div class="col-md-2"><input id="time_1" class="hour-checkbox" type="checkbox" ng-model="market_time[1]"></div>
+        			<div class="col-md-2"><input id="time_2" class="hour-checkbox" type="checkbox" ng-model="market_time[2]"></div>
+        			<div class="col-md-2"><input id="time_3" class="hour-checkbox" type="checkbox" ng-model="market_time[3]"></div>
+        			<div class="col-md-2"><input id="time_4" class="hour-checkbox" type="checkbox" ng-model="market_time[4]"></div>
+        			<div class="col-md-2"><input id="time_5" class="hour-checkbox" type="checkbox" ng-model="market_time[5]"></div>
+        		</div>
+        	</div>
+        	<div class="col-md-3">
+        		<h3> 06:00 - 12:00 </h3>
+        		<div class="row show-grid">
+        			<div class="col-md-2">6</div>
+        			<div class="col-md-2">7</div>
+        			<div class="col-md-2">8</div>
+        			<div class="col-md-2">9</div>
+        			<div class="col-md-2">10</div>
+        			<div class="col-md-2">11</div>
+        		</div>
+        		<div class="row show-grid">
+        			<div class="col-md-2"><input id="time_6" class="hour-checkbox" type="checkbox" ng-model="market_time[6]"></div>
+        			<div class="col-md-2"><input id="time_7" class="hour-checkbox" type="checkbox" ng-model="market_time[7]"></div>
+        			<div class="col-md-2"><input id="time_8" class="hour-checkbox" type="checkbox" ng-model="market_time[8]"></div>
+        			<div class="col-md-2"><input id="time_9" class="hour-checkbox" type="checkbox" ng-model="market_time[9]"></div>
+        			<div class="col-md-2"><input id="time_10" class="hour-checkbox" type="checkbox" ng-model="market_time[10]"></div>
+        			<div class="col-md-2"><input id="time_11" class="hour-checkbox" type="checkbox" ng-model="market_time[11]"></div>
+        		</div>
+        	</div>
+        	<div class="col-md-3">
+        		<h3> 12:00 - 18:00 </h3>
+        		<div class="row show-grid">
+        			<div class="col-md-2">12</div>
+        			<div class="col-md-2">13</div>
+        			<div class="col-md-2">14</div>
+        			<div class="col-md-2">15</div>
+        			<div class="col-md-2">16</div>
+        			<div class="col-md-2">17</div>
+        		</div>
+        		<div class="row show-grid">
+        			<div class="col-md-2"><input id="time_12" class="hour-checkbox" type="checkbox" ng-model="market_time[12]"></div>
+        			<div class="col-md-2"><input id="time_13" class="hour-checkbox" type="checkbox" ng-model="market_time[13]"></div>
+        			<div class="col-md-2"><input id="time_14" class="hour-checkbox" type="checkbox" ng-model="market_time[14]"></div>
+        			<div class="col-md-2"><input id="time_15" class="hour-checkbox" type="checkbox" ng-model="market_time[15]"></div>
+        			<div class="col-md-2"><input id="time_16" class="hour-checkbox" type="checkbox" ng-model="market_time[16]"></div>
+        			<div class="col-md-2"><input id="time_17" class="hour-checkbox" type="checkbox" ng-model="market_time[17]"></div>
+        		</div>
+        	</div>
+        	<div class="col-md-3">
+        		<h3> 18:00 - 24:00 </h3>
+        		<div class="row show-grid">
+        			<div class="col-md-2">18</div>
+        			<div class="col-md-2">19</div>
+        			<div class="col-md-2">20</div>
+        			<div class="col-md-2">21</div>
+        			<div class="col-md-2">22</div>
+        			<div class="col-md-2">23</div>
+        		</div>
+        		<div class="row show-grid">
+        			<div class="col-md-2"><input id="time_18" class="hour-checkbox" type="checkbox" ng-model="market_time[18]"></div>
+        			<div class="col-md-2"><input id="time_19" class="hour-checkbox" type="checkbox" ng-model="market_time[19]"></div>
+        			<div class="col-md-2"><input id="time_20" class="hour-checkbox" type="checkbox" ng-model="market_time[20]"></div>
+        			<div class="col-md-2"><input id="time_21" class="hour-checkbox" type="checkbox" ng-model="market_time[21]"></div>
+        			<div class="col-md-2"><input id="time_22" class="hour-checkbox" type="checkbox" ng-model="market_time[22]"></div>
+        			<div class="col-md-2"><input id="time_23" class="hour-checkbox" type="checkbox" ng-model="market_time[23]"></div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">确定</button>
+        <button class="btn btn-warning" ng-click="cancel()">取消</button>
+    </div>
+</script>
+<script type="text/ng-template" id="setMarketAddr.html">
+    <div class="modal-header">
+        <h3 class="modal-title">设置投放地域</h3>
+    </div>
+    <div class="modal-body">
+        <table class="addr-setting">
+        	<tr>
+        		<th><input checked ng-click="addrSelect(1,$event.target)" type="checkbox">华北地区</th>
+        		<td><input class="area area1" type="checkbox" value="11000000" ng-model="market_region['11000000']">北京</td>
+        		<td><input class="area area1" type="checkbox" value="12000000" ng-model="market_region['12000000']">天津</td>
+        		<td><input class="area area1" type="checkbox" value="13000000" ng-model="market_region['13000000']">河北</td>
+        		<td><input class="area area1" type="checkbox" value="14000000" ng-model="market_region['14000000']">山西</td>
+        		<td><input class="area area1" type="checkbox" value="15000000" ng-model="market_region['15000000']">内蒙古</td>
+        	</tr>
+        	<tr>
+        		<th><input checked ng-click="addrSelect(2,$event.target)" type="checkbox">东北地区</th>
+        		<td><input class="area area2" type="checkbox" value="21000000" ng-model="market_region['21000000']">辽宁</td>
+        		<td><input class="area area2" type="checkbox" value="22000000" ng-model="market_region['22000000']">吉林</td>
+        		<td colspan="3"><input class="area area2" type="checkbox" value="23000000" ng-model="market_region['23000000']">黑龙江</td>
+        	</tr>
+        	<tr>
+        		<th rowspan="2"><input checked ng-click="addrSelect(3,$event.target)" type="checkbox">华东地区</th>
+        		<td><input class="area area3" type="checkbox" value="31000000" ng-model="market_region['31000000']">上海</td>
+        		<td><input class="area area3" type="checkbox" value="32000000" ng-model="market_region['32000000']">江苏</td>
+        		<td><input class="area area3" type="checkbox" value="33000000" ng-model="market_region['33000000']">浙江</td>
+        		<td><input class="area area3" type="checkbox" value="35000000" ng-model="market_region['35000000']">福建</td>
+        		<td><input class="area area3" type="checkbox" value="34000000" ng-model="market_region['34000000']">安徽</td>
+        	</tr>
+        	<tr>
+        		<td colspan="5"><input class="area area3" class="area" type="checkbox" value="37000000" ng-model="market_region['37000000']">山东</td>
+        	</tr>
+        	<tr>
+        		<th><input checked ng-click="addrSelect(4,$event.target)" type="checkbox">华中地区</th>
+        		<td><input class="area area4" type="checkbox" value="41000000" ng-model="market_region['41000000']">河南</td>
+        		<td><input class="area area4" type="checkbox" value="42000000" ng-model="market_region['42000000']">湖北</td>
+        		<td><input class="area area4" type="checkbox" value="43000000" ng-model="market_region['43000000']">湖南</td>
+        		<td colspan="2"><input class="area area4" type="checkbox" value="36000000" ng-model="market_region['36000000']">江西</td>
+        	</tr>
+        	<tr>
+        		<th><input checked ng-click="addrSelect(5,$event.target)" type="checkbox">华南地区</th>
+        		<td><input class="area area5" type="checkbox" value="44000000" ng-model="market_region['44000000']">广东</td>
+        		<td><input class="area area5" type="checkbox" value="46000000" ng-model="market_region['46000000']">海南</td>
+        		<td colspan="3"><input class="area area5" type="checkbox" value="45000000" ng-model="market_region['45000000']">广西</td>
+        	</tr>
+        	<tr>
+        		<th><input checked ng-click="addrSelect(6,$event.target)" type="checkbox">西南地区</th>
+        		<td><input class="area area6" type="checkbox" value="50000000" ng-model="market_region['50000000']">重庆</td>
+        		<td><input class="area area6" type="checkbox" value="51000000" ng-model="market_region['51000000']">四川</td>
+        		<td><input class="area area6" type="checkbox" value="53000000" ng-model="market_region['53000000']">云南</td>
+        		<td><input class="area area6" type="checkbox" value="52000000" ng-model="market_region['52000000']">贵州</td>
+        		<td><input class="area area6" type="checkbox" value="54000000" ng-model="market_region['54000000']">西藏自治区</td>
+        	</tr>
+        	<tr>
+        		<th><input checked ng-click="addrSelect(7,$event.target)" type="checkbox">西北地区</th>
+        		<td><input class="area area7" type="checkbox" value="61000000" ng-model="market_region['61000000']">陕西</td>
+        		<td><input class="area area7" type="checkbox" value="62000000" ng-model="market_region['62000000']">甘肃</td>
+        		<td><input class="area area7" type="checkbox" value="63000000" ng-model="market_region['63000000']">青海</td>
+        		<td><input class="area area7" type="checkbox" value="64000000" ng-model="market_region['64000000']">宁夏回族自治区</td>
+        		<td><input class="area area7" type="checkbox" value="65000000" ng-model="market_region['65000000']">新疆维吾尔自治区</td>
+        	</tr>
+        	<tr>
+        		<th><input checked ng-click="addrSelect(8,$event.target)" type="checkbox">其它地区</th>
+        		<td><input class="area area8" type="checkbox" value="71000000" ng-model="market_region['71000000']">台湾</td>
+        		<td><input class="area area8" type="checkbox" value="81000000" ng-model="market_region['81000000']">香港</td>
+        		<td colspan="3"><input class="area area8" type="checkbox" value="82000000" ng-model="market_region['82000000']">澳门</td>
+        	</tr>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">确定</button>
+        <button class="btn btn-warning" ng-click="cancel()">取消</button>
+    </div>
+</script>
+<script type="text/ng-template" id="setDefaultPrice.html">
+    <div class="modal-header">
+        <h3 class="modal-title">修改默认出价</h3>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-2">默认出价：</div>
+            <div class="col-md-10"><input id="default_price" type="text" value="">元</div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">确定</button>
+        <button class="btn btn-warning" ng-click="cancel()">取消</button>
+    </div>
+</script>

@@ -1,0 +1,22 @@
+<div id="breadcrumbs" class="breadcrumbs">
+	<ul class="breadcrumb">
+		<li> <a href="#!/home">首页</a> </li>
+		<li class="active">推广计划</li>
+	</ul>
+	<h1>推广计划</h1>	
+</div>
+<div class="campaigns mt15">    
+	<tabset>
+		<tab heading="我的推广计划">
+	    	<div class="table-top-pannel">
+				<a type="button" class="btn btn-default btn-sm" href="#!/campaigns/add">新建推广计划</a>
+				<button type="button" class="btn btn-default btn-sm" ng-click="stop()">暂停推广</button>
+				<button type="button" class="btn btn-default btn-sm" ng-click="run()">参与推广</button>
+			</div>
+	        <table class="display" my-datatable dt-options="overrideOptions"
+	            dt-data="campaignsData"
+	            >
+	        </table>
+		</tab>
+	</tabset>
+</div>

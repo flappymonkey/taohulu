@@ -1,0 +1,83 @@
+<div id="breadcrumbs" class="breadcrumbs">
+	<ul class="breadcrumb">
+		<li> <a href="#!/home">首页</a> </li>
+		<li class="active">账户总览报表</li>
+	</ul>
+	<div type="button" class="btn btn-default btn-sm fr" my-daterange="daterangeOptions" callback="dateRangeCallback" id="reportrange" >
+	    <i class="fa fa-calendar fa-lg"></i>
+	    <span>{{startDate}} 至 {{endDate}}</span> <b class="caret"></b>
+	</div>
+	<h1>报表</h1>
+</div>
+<div class="report clearfix">
+	<ul class="lists clearfix">
+		<li ng-click="chartRedraw('pv')">
+			<div class="list-content">
+				<div class="title">
+					<span>展现量</span>
+				</div>
+				<p class="text"> {{totalData.pv}} </p>
+			</div>
+		</li>
+		<li ng-click="chartRedraw('clk')">
+			<div class="list-content">
+				<div class="title">
+					<span>点击量</span>
+				</div>
+				<p class="text"> {{totalData.clk}} </p>
+			</div>
+		</li>
+		<li ng-click="chartRedraw('ctr')">
+			<div class="list-content">
+				<div class="title">
+					<span>点击率</span>
+				</div>
+				<p class="text"> {{totalData.ctr}} </p>
+			</div>
+		</li>
+		<li ng-click="chartRedraw('cost')">
+			<div class="list-content">
+				<div class="title">
+					<span>花费</span>
+				</div>
+				<p class="text"> ￥{{totalData.cost}} </p>
+			</div>
+		</li>
+		<li ng-click="chartRedraw('account')">
+			<div class="list-content">
+				<div class="title clearfix">
+					<span>平均点击花费</span>
+				</div>
+				<p class="text"> ￥{{totalData.acp}} </p>
+			</div>
+		</li>
+	</ul>
+
+	<div class="chart-ctn">
+		<select ng-model="chartItem" ng-change="changeItem()" ng-options="item.value as item.name for item in chartItemArray"></select>
+		<highchart class="chart" id="chart1" config="chartConfig"></highchart>
+	</div>
+</div>
+
+<div class="mt15">	    
+    <tabset>
+    	<tab heading="推广计划列表">
+	        <table class="display" id="campaigns_table" my-datatable dt-options="campaignsOptions"
+	            dt-data="campaignsData"
+	            >
+	        </table>
+    	</tab>
+    	<tab heading="推广单元列表">
+	        <table class="display" id="adgroups_table" my-datatable dt-options="adgroupsOptions"
+	            dt-data="adgroupsData"
+	            >
+	        </table>
+    	</tab>
+    	<tab heading="创意列表">
+	        <table class="display" id="creatives_table" my-datatable dt-options="creativesOptions"
+	            dt-data="creativesData"
+	            >
+	        </table>
+    	</tab>
+  	</tabset>
+	</div>

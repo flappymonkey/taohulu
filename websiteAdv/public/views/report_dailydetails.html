@@ -1,0 +1,33 @@
+<div id="breadcrumbs" class="breadcrumbs">
+	<ul class="breadcrumb">
+		<li> <a href="#!/home">首页</a> </li>
+		<li class="active"><a href="#!/report/index">账户总览报表</a></li>
+		<li class="active">
+			计划名称：<a href="#!/report/campaign?campaignId={{campaign_info.campaign_id}}">
+			{{campaign_info.title}}
+			</a> 
+        </li>
+		<li class="active adgroup-nav"><a href="#!/report/adgroup?campaignId={{campaignId}}&adgroupId={{adgroupId}}">{{adgroup_info.title}}</a></li>
+		<li class="active">分日详情<span class="creative-nav">：{{creative_info.title}}</span></li>
+	</ul>
+	<div type="button" class="btn btn-default btn-sm fr" my-daterange="daterangeOptions" callback="dateRangeCallback" id="reportrange" >
+	    <i class="fa fa-calendar fa-lg"></i>
+	    <span>{{startDate}} 至 {{endDate}}</span> <b class="caret"></b>
+	</div>
+	<h1>报表</h1>
+</div>
+<div class="report clearfix">
+	<div class="chart-ctn">
+		<select ng-model="chartItem" ng-change="changeItem()" ng-options="item.value as item.name for item in chartItemArray"></select>
+		<highchart class="chart" id="chart1" config="chartConfig"></highchart>
+	</div>
+</div>
+
+<div class="history-table-ctn">
+<div class="history-table-title">
+	<span class="list-title"><label>分日详情列表：</label>{{list_title}}</span>
+	<span class="creative-nav"><label>所属宝贝：</label>{{adgroup_info.title}}</span>
+</div>
+<table class="display" id="history_table" my-datatable dt-options="historyOptions" dt-data="historyData">
+</table>
+</div>
