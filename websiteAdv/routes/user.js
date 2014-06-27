@@ -21,7 +21,7 @@ exports.dologin = function(req, res){
                   if(rows.length){
                     req.session.user_id = req.body.username;
                     req.session.cookie.expires = false;
-                    res.redirect("/spa");
+                    res.redirect("/");
                   }else{
                     var data = {
                       error: true
@@ -42,5 +42,5 @@ exports.dologout = function(req, res){
   req.session.destroy(function(err){
 
   });
-  res.redirect("/spa/user/login");
+  res.redirect("/user/login");
 }
